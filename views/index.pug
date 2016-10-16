@@ -1,43 +1,42 @@
 extends ./layout.pug
 
 block content
-  div.container
-    div.container
-      div(class='col-xs-6 col-xs-offset-3')
-        img(src='/lib/images/mentor.png' class='mentor_image')
-      div(class='col-md-8 col-md-offset-2')
-        ul.faq_list
-          li
-            h4 What?
-            p A simple web app to help automate the process of finding a mentor.
-          li
-            h4 Why?
-            p.
-              Life's busy for students, even busier for students with jobs, families, and responsibilites
-              to take care of outside of school work. This app aims to make the process of finding a mentor
-              as streamlined and automated as possible. Simply fill out the form below with some basic info
-              and let the app go to work.
-          li
-            h4 How?
-            p.
-               Outward facing it's easy, a simple Express server running on NodeJS, an FAQ, and a form
-               rendered with Pug. Your data is being stored on MongoDB. Internally I've setup a Twitter
-               bot that uses Twitter's Streaming and REST api's. It is always listening for certain key
-               words and phrases. Whenever a tweet is sent that matches the criteria, the server intercepts
-               and runs it through an algorithim. If the algorithim determines it is valuable, we send a
-               mass text to all registered numbers using Twilio's SMS/MMS messaging service, containing
-               relevant info from the tweet.
-
     if(msg)
       h1.text-center #{msg}
     if(!registered)
-      form(method='POST' class='main_form')
-        .form-group
-          label(for='emailInput') Email address
-          input#emailInput.form-control(type='email' name='email' aria-describedby='emailHelp', placeholder='Enter email')
-          small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
-        .form-group
-          label(for='phoneInput') Phone Number
-          input#phoneInput.form-control(type='tel' name='phone' value='+1 ' required)
-          small#phoneHelp.form-text.text-muted example: +1 (555) 555-1597
-        button.btn.btn-primary(type='submit') Submit
+      div.container
+        div.container
+          div(class='col-xs-6 col-xs-offset-3')
+            img(src='/lib/images/mentor.png' class='mentor_image')
+          div(class='col-md-8 col-md-offset-2')
+            ul.faq_list
+              li
+                h4 What?
+                p A simple web app to help automate the process of finding a mentor.
+              li
+                h4 Why?
+                p.
+                  Life's busy for students, even busier for students with jobs, families, and responsibilites
+                  to take care of outside of school work. This app aims to make the process of finding a mentor
+                  as streamlined and automated as possible. Simply fill out the form below with some basic info
+                  and let the app go to work.
+              li
+                h4 How?
+                p.
+                   Outward facing it's easy, a simple Express server running on NodeJS, an FAQ, and a form
+                   rendered with Pug. Your data is being stored on MongoDB. Internally We've setup a Twitter
+                   bot that uses Twitter's Streaming and REST api's. It is always listening for certain key
+                   words and phrases. Whenever a tweet is sent that matches the criteria, the server intercepts
+                   and runs it through an algorithim. If the algorithim determines it is valuable, we send a
+                   mass text to all registered numbers using Twilio's SMS/MMS messaging service, containing
+                   relevant info from the tweet.
+        form(method='POST' class='main_form')
+          .form-group
+            label(for='emailInput') Email address
+            input#emailInput.form-control(type='email' name='email' aria-describedby='emailHelp', placeholder='Enter email' required)
+            small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+          .form-group
+            label(for='phoneInput') Phone Number
+            input#phoneInput.form-control(type='tel' name='phone' required)
+            small#phoneHelp.form-text.text-muted example: +1 (555) 555-1597
+          button.btn.btn-primary(type='submit') Submit
