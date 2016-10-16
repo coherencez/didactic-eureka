@@ -2,7 +2,29 @@ doctype html
 html
   head
     title Mentor Bot
-    link(rel='stylesheet' href='/css/main.css')
+    link(rel='stylesheet' href='/lib/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet' href='/lib/css/main.css')
   body
-    h1 Hello from pug
-    
+    nav.navbar.navbar-inverse.navbar-static-top
+      ul.nav.navbar-nav
+        li.active
+          a(href='#') Link
+        li
+          a(href='#') Link
+    div.container
+      h1 Hello from pug
+
+      form(method='POST')
+        .form-group
+          label(for='emailInput') Email address
+          input#emailInput.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
+          small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+        .form-group
+          label(for='phoneInput') Phone Number
+          input#phoneInput.form-control(type='tel' value='+1' required)
+          small#phoneHelp.form-text.text-muted example: +1 (555) 555-1597
+        button.btn.btn-primary(type='submit') Submit
+
+
+    script(src='/lib/jquery/dist/jquery.min.js')
+    script(src='/lib/bootstrap/dist/js/bootstrap.min.js')

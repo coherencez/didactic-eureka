@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/tkswann2/twitter-bot#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "express": "^4.14.0",
+    "jquery": "^3.1.1",
     "pug": "^2.0.0-beta6",
     "twilio": "^2.11.0",
     "twitter": "^1.4.0"
