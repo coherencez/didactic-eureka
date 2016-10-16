@@ -19,10 +19,10 @@ app.get('/', (req,res) => {
 
 app.post('/', ({body: {email, phone}},res,err) => {
   User
-  .findOne({phone})
+  .findOne({email})
   .then(user => {
     if(user) {
-      return res.render('index', {msg: 'Email or Phone is already registered!'})
+      return res.render('index', {msg: 'Email is already registered, please try again'})
     }
     return User.create({email, phone})
   })
@@ -36,13 +36,10 @@ app.use((req, res, next) => {
 
 // error handling middleware
 app.use((err, {method, url, headers: {'user-agent': agent}}, res, next) => {
-	// res.sendStatus(err. status || 500)
-	// console.error(`[${Date()}]`, chalk.red(`${req.method} ${req.url}`), `Error(${chalk.red(res.statusCode)}): ${chalk.red(res.statusMessage)}`)
-	// console.error(err.stack)
 	if(process.env.NODE_ENV === 'production') {
 		res.sendStatus(err.status || 500)
 	} else {
-		// res.set('Content-Type', 'text/plain').send(err.stack)
+		res.set('Content-Type', 'text/plain').send(err.stack)
 	}
 
 	const timeStamp     = new Date()
