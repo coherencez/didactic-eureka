@@ -3,6 +3,8 @@ const express = require('express')
   ,bodyParser = require('body-parser')
   ,      PORT = process.env.PORT || 3000
   ,       app = express()
+  , {connect} = require('./db/database')
+  ,      User = require('./db/models/User')
 
 app.set('port', PORT)
 app.set('view engine', 'pug')
@@ -14,10 +16,17 @@ app.get('/', (req,res) => {
   res.render('index')
 })
 
-app.post('/', ({body: {email, phone}},res) => {
-  console.log(email, phone)
+app.post('/', ({body: {email, phone}},res,err) => {
+  User
+    .create({email, phone})
+    .then(data => console.log('DB SUCCESS',data))
+    .catch(console.error)
 })
 
-app.listen(PORT, () => {
-  console.log(`Now listening on PORT: ${PORT}`)
-})
+connect()
+  .then(() =>
+    app.listen(PORT, () => {
+      console.log(`Now listening on PORT: ${PORT}`)
+    })
+  )
+  .catch(console.error)
