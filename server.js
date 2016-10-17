@@ -27,12 +27,12 @@ app.post('/', ({body: {email, phone}},res,err) => {
     return User.create({email, phone})
   })
   .then(user => res.render('index', {msg: `Thank you! Your number: ${user.phone} and email: ${user.email} have been registered`, registered: true}))
-  .catch(console.error)
+  .catch(err)
 })
 
-// app.use((req, res, next) => {
-// 	res.render('404')
-// })
+app.use((req, res, next) => {
+	res.render('404')
+})
 
 // error handling middleware
 app.use((err, {method, url, headers: {'user-agent': agent}}, res, next) => {
